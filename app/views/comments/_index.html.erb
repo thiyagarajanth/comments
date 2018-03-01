@@ -1,0 +1,13 @@
+
+<div id='comment-container' class='container row'>
+  
+  <% @comments.each do |comment| %>
+    <div id='comments-list' class='col-md-8 justify-content-md-center'>
+      <span>
+        <strong>Comment from IP: </strong><span> <%= comment.ip_address%> <strong>at</strong> <%= comment.created_at.to_s(:db)%></span>
+      </span>
+    </div >
+    <div class='col-xs-12 col-md-8 '><ul><%= comment.notes.html_safe%></ul> </div>
+    <br/>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+<%= form_for @comment,  :url => comments_path(@comment), :remote => true do |f| %>
+
+
+<%= f.text_area :notes,{:class=>"form-control" ,:rows=>"4" ,:placeholder=>"Exception Log comments."} %>
+
+<%= submit_tag 'Post', :class => 'pull-right margin-top btn btn-default' %>
+<% end %>
+
