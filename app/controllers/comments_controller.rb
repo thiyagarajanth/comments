@@ -4,12 +4,17 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-#     ids = Comment.find_by_sql("SELECT array_to_string(array_agg(id), ',') as id, count(*) as cnt, 
-# to_timestamp(floor((extract('epoch' from created_at) / 300 )) * 300) 
-# as interval_alias
-# FROM comments GROUP BY interval_alias  order by 1,2").map(&:id)
-    @comments = Comment.all#.where(:id =>ids).order(:id => :desc)
+    ids = Comment.find_by_sql("SELECT array_to_string(array_agg(id), ',') as id, count(*) as cnt, 
+to_timestamp(floor((extract('epoch' from created_at) / 300 )) * 300) 
+as interval_alias
+FROM comments GROUP BY interval_alias  order by 1,2").map(&:id)
+    @comments = Comment.where(:id =>ids).order(:id => :desc)
     @comment = Comment.new
+    p '------this si sthe '
+    p Comment.find_by_sql("SELECT array_to_string(array_agg(id), ',') as id, count(*) as cnt, 
+to_timestamp(floor((extract('epoch' from created_at) / 300 )) * 300) 
+as interval_alias
+FROM comments GROUP BY interval_alias  order by 1,2").map{|x|[x.id, x.cnt,x.interval_alias]}
 
     respond_to do |format|
       format.html # new.html.erb
